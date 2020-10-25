@@ -29,7 +29,7 @@ After Xcode checking out the source and resolving the version, you can choose th
 ### How to install manually
 
 1. Download latest xcframework from [Releases](https://github.com/kycaid/ios-sdk/releases) page.
-2. Drop KYCAIDSDK.xcframework into Frameworks, Libraries and Embedded Content section of Xcode.
+2. Drop `KYCAIDSDK.xcframework` into Frameworks, Libraries and Embedded Content section of Xcode.
 3. Select "Embed and sign".
 
 ![Xcode Screenshot](/logo/logo.png)
@@ -41,17 +41,13 @@ import KYCAIDSDK
 
 ## Usage
 
-## Run verification flow
 
+
+### Setup SDK
+
+Initialize `KYCAID` instance as early as possible. Your api token and form identifier are available at your [Dashboard](https://kycaid.com/dashboard)
 ```swift
-public struct KYCAID {
-
-    /// Starts verification process by showing appropriate UI
-    /// - Parameters:
-    ///   - apiToken: API token. Must be obtained from dashboaed
-    ///   - formId: Form identifier. Must be obtained from dashboard
-    ///   - containerViewController: UIViewController which is used a contanier. KYCAID shows its UI modally using default presentation properties
-    public func startVerification(apiToken: String, formId: String, containerViewController: UIViewController)
+let sdk = KYCAID(apiToken: "<YOUR API TOKEN>", formId: "<YOUR FORM ID>")
 }
 ```
 
