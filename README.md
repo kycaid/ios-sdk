@@ -13,7 +13,7 @@ We are a team specialized in all KYC and Regulatory compliance matters. With us 
 
 KYCAID SDK is currently available via:
 
-* Swifth Package Manager
+* [Swift Package Manager](/asda/asd)
 * Manual drop-in of xcframework
 
 ### Installation Guide.
