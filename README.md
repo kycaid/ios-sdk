@@ -113,6 +113,18 @@ sdk.startVerification(containerViewController: self) { result in
 }
 ```
 
+### Get verification status
+
+Once you have `verificationId` it's possible to check the verification status.
+```swift
+/// Checks verification state
+/// - Parameters:
+///   - apiToken: API token. Must be obtained from dashboard
+///   - verificationId: The identifier of the verification. See `startVerification` for deails
+///   - completion: Completion that helds the result
+public func retrieveVerificationState(verificationId: String, completion: @escaping ((Result<KYCAIDSDK.KYCAID.VerificationState, Error>) -> Void))
+```
+
 ## Screenshots
 
 <img src="/logo/license.png" width="320">
