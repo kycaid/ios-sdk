@@ -71,7 +71,7 @@ sdk.startVerification(containerViewController: self) { result in
 As a result of this call, "Select your country" verification step should appear:
 ![Xcode Screenshot](/logo/country.png)
 
-<img src="/logo/country.png" width="48">
+<img src="/logo/country.png" width="320">
 
 ## Localization
 
