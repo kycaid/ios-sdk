@@ -4,7 +4,7 @@
 
 ## Contents
 
-* [How to install from Xcode](###how-to-install-from-xcode)
+* [How to install from Xcode](#how-to-install-from-xcode)
 * [Contacts](#contacts)
 * [Reminders](#reminders)
 * [Photos](#photos)
