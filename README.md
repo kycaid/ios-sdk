@@ -76,49 +76,45 @@ As a result of this call, first verification step should appear:
 
 Further, all required verification steps are about to be open automatically, based on your form setup.
 
-For now SDK supported states are:
+### Handle verification result
 
+Once user done with the verification flow, the completion is invoked with `VerificationInfo` as a result
 ```swift
-public enum ViewState {
+/// Result structure that is passed into verification completion
+public struct VerificationInfo {
 
-    /// Initial state nothing is happening
-    case initial
+    /// Verification identifier.
+    public let verificationId: String
 
-    /// Form is being loaded
-    case formLoading
+    /// Applicant identifier. Optional. Will be nll in case of external verification.
+    public let applicantId: String?
 
-    /// Coutry selection scree
-    case countrySelect
-
-    /// Choose verification type screen
-    case verificationType
-
-    /// Browser screen
-    case browser
-
-    /// Document type screen
-    case documentType
-
-    /// Document info screen
-    case documentInfo
-
-    /// Selfie screen
-    case selfie
-
-    /// Profile screen
-    case profile
-
-    /// Verification is being created screen
-    case inProgress
-
-    /// Verification result screen
-    case verificationResult
-
-    /// Verficiation success screen
-    case verificationSuccess
+    /// Applicant info. Optional. Will be nll in case of external verification.
+    public let applicantInfo: KYCAIDSDK.ApplicantInfo?
 }
 ```
-They must be look like this:
+
+### Handle possible errors and cancellation:
+
+If user cancels verification flow, or some error occured, the completion is invoked with `Error` as a result.
+```swift
+sdk.startVerification(containerViewController: self) { result in
+    switch result {
+    case .success(let verificationInfo):
+        //Handle verificationInfo
+    case .failure(let error):
+        switch error {
+        case KYCAID.SDKError.cancelled:
+            //Handle cancellation
+        default:
+            //Handle generic error
+        }
+    }
+}
+```
+
+## Screenshots
+
 <img src="/logo/license.png" width="320">
 <img src="/logo/photo.png" width="320">
 <img src="/logo/profile.png" width="320">
