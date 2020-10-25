@@ -1,6 +1,6 @@
 # Official KYCAID iOS SDK
 
-![GitHub Logo](/logo/logo_entry.png)
+![GitHub Logo](/logo/logo_new_entry.png)
 
 ## Contents
 
