@@ -24,14 +24,5 @@ public struct KYCAID {
 
 ## Links
 
-Production:
-https://docs.kycaid.com
-
-Staging site: 
-https://stg.kycaid.com
-
-Staging API:
-https://stg-api.kycaid.com
-
 API documentation:
-https://docs.google.com/document/d/1iPcKhGNkn-u9toxYJXvtria0qfYO4Aaqq1vC2BjlLqg/edit
+https://docs.kycaid.com
