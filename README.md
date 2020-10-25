@@ -141,6 +141,18 @@ Once you have `verificationId` it's possible to check the verification status.
 public func retrieveVerificationState(verificationId: String, completion: @escaping ((Result<KYCAIDSDK.KYCAID.VerificationState, Error>) -> Void))
 ```
 
+## Notes
+
+SDK uses Camera and Photos Library to make photo verification possible, so next entries shold be added to the `Info.plist` of your application:
+
+```
+"NSCameraUsageDescription" = "Camera permission is required to create verifications";
+"NSPhotoLibraryUsageDescription" = "Library permission is required to create verifications";
+
+```
+#### Info.plist:
+![Xcode Screenshot](/logo/info_plist.png)
+
 ## Screenshots
 
 <img src="/logo/license.png" width="320">
