@@ -1,10 +1,24 @@
-# KYCAID-iOS
+# Officia KYCAID iOS SDK
 
 ![GitHub Logo](/logo/logo.png)
 
 We are a team specialized in all KYC and Regulatory compliance matters. With us you will accelerate customer interaction, reduce risks and simplify your business processes.
 
-## SDK
+## Requirements
+
+* Xcode 11+
+* iOS 13+
+
+## Integration
+
+KYCAID SDK is currently available via:
+
+* Swifth Package Manager
+* Manual drop-in of xcframework
+
+### Installation Guide.
+
+SPRM
 
 ### Usage
 
