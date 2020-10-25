@@ -69,11 +69,13 @@ sdk.startVerification(containerViewController: self) { result in
 }
 ```
 Basically, this is all you need to start a verification. 
+
 As a result of this call, first verification step should appear:
 
 <img src="/logo/country.png" width="360">
 
 Further, all required verification steps are about to be open automatically, based on your form setup.
+
 For now SDK supported states are:
 
 ```swift
@@ -116,8 +118,11 @@ public enum ViewState {
     case verificationSuccess
 }
 ```
+They must be look like this:
+<img src="/logo/license.png" width="360">
+<img src="/logo/photo.png" width="360">
+<img src="/logo/profile.png" width="360">
 
-All 
 
 ## Localization
 
