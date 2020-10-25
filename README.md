@@ -2,6 +2,14 @@
 
 ![GitHub Logo](/logo/logo.png)
 
+## Contents
+
+* [How to install from Xcode](###how-to-install-from-xcode)
+* [Contacts](#contacts)
+* [Reminders](#reminders)
+* [Photos](#photos)
+* [Full Disk Access](#full-disk-access)
+
 ## Requirements
 
 * Xcode 11+
