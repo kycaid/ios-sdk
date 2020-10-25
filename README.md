@@ -28,11 +28,16 @@ KYCAID SDK is currently available via:
 
 From Xcode 11, you can use Swift Package Manager to add Kingfisher to your project.
 1. Select File > Swift Packages > Add Package Dependency. 
-2. Enter https://github.com/onevcat/Kingfisher.git in the "Choose Package Repository" dialog.
+2. Enter `https://github.com/kycaid/ios-sdk` in the "Choose Package Repository" dialog.
 3. In the next page, specify the version resolving rule as "Branch" with "master".
 After Xcode checking out the source and resolving the version, you can choose the "KYCAID" library and add it to your app target.
 
-![Xcode Screenshot](/logo/logo.png)
+Add dependency:
+![Xcode Screenshot](/logo/add_dep.png)
+Select master:
+![Xcode Screenshot](/logo/sel_master.png)
+Intergrate to your target:
+![Xcode Screenshot](/logo/intergate.png)
 
 ### How to install manually
 
