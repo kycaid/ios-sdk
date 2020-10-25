@@ -13,12 +13,20 @@ We are a team specialized in all KYC and Regulatory compliance matters. With us 
 
 KYCAID SDK is currently available via:
 
-* [Swift Package Manager](/asda/asd)
+* [Swift Package Manager](https://swift.org/package-manager/)
 * Manual drop-in of xcframework
 
-### Installation Guide.
+### How to install:
 
-SPRM
+From Xcode 11, you can use Swift Package Manager to add Kingfisher to your project.
+1. Select File > Swift Packages > Add Package Dependency. 
+2. Enter https://github.com/onevcat/Kingfisher.git in the "Choose Package Repository" dialog.
+3. In the next page, specify the version resolving rule as "Branch" with "master".
+After Xcode checking out the source and resolving the version, you can choose the "KYCAID" library and add it to your app target.
+
+![Xcode Screenshot](/logo/logo.png)
+
+
 
 ### Usage
 
