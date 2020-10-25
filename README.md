@@ -28,7 +28,7 @@ After Xcode checking out the source and resolving the version, you can choose th
 
 ### How to install manually
 
-1. Download latest xcframework from ![Releases](https://github.com/kycaid/ios-sdk/releases) page.
+1. Download latest xcframework from [Releases](https://github.com/kycaid/ios-sdk/releases) page.
 2. Drop KYCAIDSDK.xcframework into Frameworks, Libraries and Embedded Content section of Xcode.
 3. Select "Embed and sign".
 
