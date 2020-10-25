@@ -16,7 +16,7 @@ KYCAID SDK is currently available via:
 * [Swift Package Manager](https://swift.org/package-manager/)
 * Manual drop-in of xcframework
 
-### How to install from Xcode:
+### How to install from Xcode
 
 From Xcode 11, you can use Swift Package Manager to add Kingfisher to your project.
 1. Select File > Swift Packages > Add Package Dependency. 
@@ -26,12 +26,20 @@ After Xcode checking out the source and resolving the version, you can choose th
 
 ![Xcode Screenshot](/logo/logo.png)
 
+### How to install manually
+
+1. Download latest xcframework from ![Releases](https://github.com/kycaid/ios-sdk/releases) page.
+2. Drop KYCAIDSDK.xcframework into Frameworks, Libraries and Embedded Content section of Xcode.
+3. Select "Embed and sign".
+
+![Xcode Screenshot](/logo/logo.png)
+
 After installation, you could import Kingfisher to your project by adding this:
 ```swift
 import KYCAIDSDK
 ```
 
-### Usage
+## Usage
 
 ## Run verification flow
 
