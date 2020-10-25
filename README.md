@@ -1,8 +1,6 @@
-# Officia KYCAID iOS SDK
+# Official KYCAID iOS SDK
 
 ![GitHub Logo](/logo/logo.png)
-
-We are a team specialized in all KYC and Regulatory compliance matters. With us you will accelerate customer interaction, reduce risks and simplify your business processes.
 
 ## Requirements
 
@@ -41,13 +39,33 @@ import KYCAIDSDK
 
 ## Usage
 
-
-
 ### Setup SDK
 
-Initialize `KYCAID` instance as early as possible. Your api token and form identifier are available at your [Dashboard](https://kycaid.com/dashboard)
+Initialize `KYCAID` instance as early as possible. 
+Grab api token and form identifier from the [Dashboard](https://kycaid.com/dashboard)
 ```swift
 let sdk = KYCAID(apiToken: "<YOUR API TOKEN>", formId: "<YOUR FORM ID>")
+```
+
+### Run verification flow
+
+Once you are done with the setup, you can run verification flow. You must provide content view controller, so SDK is able to show its UI.
+```swift
+
+//Interface
+
+/// Starts verification process by showing appropriate UI
+/// - Parameters:
+///   - apiToken: API token. Must be obtained from dashboard
+///   - formId: Form identifier. Must be obtained from dashboard
+///   - containerViewController: UIViewController which is used as a contanier. KYCAID shows its UI modally using default presentation properties.
+///   - completion: Completion that helds the result. Optional
+public func startVerification(containerViewController: UIViewController, completion: ((Result<KYCAIDSDK.KYCAID.VerificationInfo, Error>) -> Void)? = nil)
+
+// Usage
+
+sdk.startVerification(containerViewController: self) { result in
+    //Handle verification result here
 }
 ```
 
