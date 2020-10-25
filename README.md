@@ -5,10 +5,12 @@
 ## Contents
 
 * [How to install from Xcode](#how-to-install-from-xcode)
-* [Contacts](#contacts)
-* [Reminders](#reminders)
-* [Photos](#photos)
-* [Full Disk Access](#full-disk-access)
+* [How to install manually](#how-to-install-manually)
+* [Setup SDK](#setup-sdk)
+* [Run verification flow](#run-verification-flow)
+* [Handle verification result](#handle-verification-result)
+* [Handle possible errors and cancellation](#handle-possible-errors-and-cancellation)
+* [Get verification status](#get-verification-status)
 
 ## Requirements
 
