@@ -68,8 +68,56 @@ sdk.startVerification(containerViewController: self) { result in
     //Handle verification result here
 }
 ```
-As a result of this call, "Select your country" verification step should appear:
+Basically, this is all you need to start a verification. 
+As a result of this call, first verification step should appear:
+
 <img src="/logo/country.png" width="360">
+
+Further, all required verification steps are about to be open automatically, based on your form setup.
+For now SDK supported states are:
+
+```swift
+public enum ViewState {
+
+    /// Initial state nothing is happening
+    case initial
+
+    /// Form is being loaded
+    case formLoading
+
+    /// Coutry selection scree
+    case countrySelect
+
+    /// Choose verification type screen
+    case verificationType
+
+    /// Browser screen
+    case browser
+
+    /// Document type screen
+    case documentType
+
+    /// Document info screen
+    case documentInfo
+
+    /// Selfie screen
+    case selfie
+
+    /// Profile screen
+    case profile
+
+    /// Verification is being created screen
+    case inProgress
+
+    /// Verification result screen
+    case verificationResult
+
+    /// Verficiation success screen
+    case verificationSuccess
+}
+```
+
+All 
 
 ## Localization
 
