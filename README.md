@@ -157,13 +157,13 @@ SDK uses Camera and Photos Library to make photo verification possible, so next 
 
 <p float="center">
   <img src="/logo/screenshots/1.PNG" width="240" />
-  <img src="/logo/screenshots/2.PNG" width="240" /> 
-  <img src="/logo/screenshots/3.PNG" width=240" />
+  <img src="/logo/screenshots/5.PNG" width="240" /> 
+  <img src="/logo/screenshots/4.PNG" width=240" />
 </p>
 <p float="center">
-  <img src="/logo/screenshots/4.PNG" width="240" />
-  <img src="/logo/screenshots/5.PNG" width="240" /> 
-  <img src="/logo/screenshots/6.PNG" width=240" />
+  <img src="/logo/screenshots/6.PNG" width="240" />
+  <img src="/logo/screenshots/3.PNG" width="240" /> 
+  <img src="/logo/screenshots/2.PNG" width=240" />
 </p>
 
 ## Localization
