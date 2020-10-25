@@ -45,7 +45,8 @@ After Xcode checking out the source and resolving the version, you can choose th
 2. Drop `KYCAIDSDK.xcframework` into Frameworks, Libraries and Embedded Content section of Xcode.
 3. Select "Embed and sign".
 
-![Xcode Screenshot](/logo/logo.png)
+#### Add manually:`
+![Xcode Screenshot](/logo/manual.png)
 
 After installation, you could import Kingfisher to your project by adding this:
 ```swift
