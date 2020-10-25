@@ -155,7 +155,7 @@ SDK uses Camera and Photos Library to make photo verification possible, so next 
 
 ## Screenshots
 
-![alt-text-1](/logo/screenshots/1.png "title-1") ![alt-text-2](/logo/screenshots/2.png "title-1")
+![alt-text-1](/logo/screenshots/1.PNG "title-1") ![alt-text-2](/logo/screenshots/2.PNG "title-1")
 
 <img src="/logo/license.png" width="320">
 <img src="/logo/photo.png" width="320">
