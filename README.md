@@ -32,12 +32,12 @@ From Xcode 11, you can use Swift Package Manager to add Kingfisher to your proje
 3. In the next page, specify the version resolving rule as "Branch" with "master".
 After Xcode checking out the source and resolving the version, you can choose the "KYCAID" library and add it to your app target.
 
-Add dependency:
+#### Add dependency:
 ![Xcode Screenshot](/logo/add_dep.png)
-Select master:
+#### Select master:
 ![Xcode Screenshot](/logo/sel_master.png)
-Intergrate to your target:
-![Xcode Screenshot](/logo/intergate.png)
+#### Intergrate to your target:
+![Xcode Screenshot](/logo/integr.png)
 
 ### How to install manually
 
