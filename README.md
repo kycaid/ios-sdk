@@ -11,6 +11,7 @@
 * [Handle verification result](#handle-verification-result)
 * [Handle possible errors and cancellation](#handle-possible-errors-and-cancellation)
 * [Get verification status](#get-verification-status)
+* [Interface customization](#customization)
 
 ## Requirements
 
@@ -140,6 +141,38 @@ Once you have `verificationId` it's possible to check the verification status.
 ///   - completion: Completion that helds the result
 public func retrieveVerificationState(verificationId: String, completion: @escaping ((Result<KYCAIDSDK.KYCAID.VerificationState, Error>) -> Void))
 ```
+
+## Customization
+
+KYCAID SDK supports basic UI customization. 
+To change UI elements appearance you can pass `Styleguide` structure intro SDK initialization:
+```swift
+let styleguide = Styleguide(<your params here>)
+let sdk = KYCAID(apiToken: "<YOUR API TOKEN>", formId: "<YOUR FORM ID>" styleguide: styleguide)
+```
+Styleguide properties:
+```swift
+public struct Styleguide {
+
+    public let backgroundColor: UIColor
+    public let titleColor: UIColor
+    public let subtitleColor: UIColor
+    public let sectionHeaderTitleColor: UIColor
+    public let cellBackgroundColor: UIColor
+    public let emphesizedCellBackgroundColor: UIColor
+    public let cellTextColor: UIColor
+    public let emphesizedCellTextColor: UIColor
+    public let cellTextPlaceholderColor: UIColor
+    public let navigationButtonColor: UIColor
+    public let segmentedControlSelectionColor: UIColor
+}
+```
+Note that each property has its default value, so you can change only those you need.
+**Example**
+<p float="center">
+    <img src="https://user-images.githubusercontent.com/1411778/111072909-48483100-84e5-11eb-8fb0-78f775d3ac63.PNG" width="240">
+    <img src="https://user-images.githubusercontent.com/1411778/111072913-4d0ce500-84e5-11eb-8fbe-5d8b3c90c382.PNG" width="240">
+</p>
 
 ## Notes
 
