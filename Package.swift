@@ -15,7 +15,7 @@ let package = Package(
         .binaryTarget(
             name: "KYCAIDSDK",
             url: "https://github.com/kycaid/ios-sdk/releases/download/2.0.0-rc01/KYCAIDSDK.xcframework.zip",
-            checksum: "68bcb123601b95acc0913abb5dca6dc99f829d2881aa4b045d4e979fd2c9f36c"
+            checksum: "51ada46f3c31d7ba1636f2bf5053f041bbb22fecc01fa388d8b11ccb07102a1a"
         )
     ]
 )
