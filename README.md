@@ -1,6 +1,6 @@
 # Official KYCAID iOS SDK
 
-![GitHub Logo](/logo/logo_new_entry.png)
+![GitHub Logo](/images/logo_new_entry.png)
 
 ## Contents
 
@@ -27,18 +27,15 @@ KYCAID SDK is currently available via:
 
 ### How to install from Xcode
 
-From Xcode 11, you can use Swift Package Manager to add KYCAID to your project.
-1. Select File > Swift Packages > Add Package Dependency. 
-2. Enter `https://github.com/kycaid/ios-sdk` in the "Choose Package Repository" dialog.
-3. In the next page, specify the version resolving rule as "Branch" with "master".
-After Xcode checking out the source and resolving the version, you can choose the "KYCAID" library and add it to your app target.
+From Xcode, you can use Swift Package Manager to add KYCAID to your project.
+1. Select Your App Project > Package Dependencies > Add Package Dependency.
+2. Enter `https://github.com/kycaid/ios-sdk` in the search box.
+3. Keep the latest version or specify the version you want and click "Add package".
 
 #### Add dependency:
-![Xcode Screenshot](/logo/add_dep.png)
-#### Select master:
-![Xcode Screenshot](/logo/sel_master.png)
-#### Intergrate to your target:
-![Xcode Screenshot](/logo/integr.png)
+![Xcode Screenshot](/images/add_package.png)
+#### Select package and add to your project:
+![Xcode Screenshot](/images/select_package.png)
 
 ### How to install manually
 
@@ -46,10 +43,10 @@ After Xcode checking out the source and resolving the version, you can choose th
 2. Drop `KYCAIDSDK.xcframework` into Frameworks, Libraries and Embedded Content section of Xcode.
 3. Select "Embed and sign".
 
-#### Add manually:`
-![Xcode Screenshot](/logo/manual.png)
+#### Add manually:
+![Xcode Screenshot](/images/manual.png)
 
-After installation, you could import Kingfisher to your project by adding this:
+After installation, import SDK to your project by adding this:
 ```swift
 import KYCAIDSDK
 ```
@@ -59,10 +56,21 @@ import KYCAIDSDK
 ### Setup SDK
 
 Initialize `KYCAID` instance as early as possible. 
-Grab api token and form identifier from the [Dashboard](https://kycaid.com/dashboard)
+Grab api token and form identifier from the [Dashboard](https://app.kycaid.com/dashboard)
 ```swift
 let sdk = KYCAID(apiToken: "<YOUR API TOKEN>", formId: "<YOUR FORM ID>")
 ```
+You can also specify the applicant ID, the color configuration and the default language in which the verification will be run.
+```swift
+let sdk = KYCAID(
+    apiToken: "<YOUR API TOKEN>",
+    formId: "<YOUR FORM ID>",
+    applicantId: "<ApplicantID>",
+    colorConfiguration: ...,
+    languageCode: "en"
+)
+```
+See [Interface customization](#customization) to get more details about `ColorConfiguration`.
 
 ### Run verification flow
 
@@ -73,8 +81,6 @@ Once you are done with the setup, you can run verification flow. You must provid
 
 /// Starts verification process by showing appropriate UI
 /// - Parameters:
-///   - apiToken: API token. Must be obtained from dashboard
-///   - formId: Form identifier. Must be obtained from dashboard
 ///   - containerViewController: UIViewController which is used as a contanier. KYCAID shows its UI modally using default presentation properties.
 ///   - completion: Completion that helds the result. Optional
 public func startVerification(containerViewController: UIViewController, completion: ((Result<KYCAIDSDK.KYCAID.VerificationInfo, Error>) -> Void)? = nil)
@@ -89,9 +95,9 @@ Basically, this is all you need to start a verification.
 
 As a result of this call, first verification step should appear:
 
-<img src="/logo/country.png" width="320">
+<img src="/images/first_step.PNG" width="320">
 
-Further, all required verification steps are about to be open automatically, based on your form setup.
+Further, all required verification steps will be opened automatically, based on your form setup.
 
 ### Handle verification result
 
@@ -136,8 +142,7 @@ Once you have `verificationId` it's possible to check the verification status.
 ```swift
 /// Checks verification state
 /// - Parameters:
-///   - apiToken: API token. Must be obtained from dashboard
-///   - verificationId: The identifier of the verification. See `startVerification` for deails
+///   - verificationId: The identifier of the verification. See `startVerification` for details
 ///   - completion: Completion that helds the result
 public func retrieveVerificationState(verificationId: String, completion: @escaping ((Result<KYCAIDSDK.KYCAID.VerificationState, Error>) -> Void))
 ```
@@ -145,33 +150,110 @@ public func retrieveVerificationState(verificationId: String, completion: @escap
 ## Customization
 
 KYCAID SDK supports basic UI customization. 
-To change UI elements appearance you can pass `Styleguide` structure intro SDK initialization:
+To change UI element colors you can pass `ColorConfiguration` structure to SDK initialization:
 ```swift
-let styleguide = Styleguide(<your params here>)
-let sdk = KYCAID(apiToken: "<YOUR API TOKEN>", formId: "<YOUR FORM ID>" styleguide: styleguide)
+let colorConfiguration = ColorConfiguration(<your params here>)
+let sdk = KYCAID(
+    apiToken: "<YOUR API TOKEN>",
+    formId: "<YOUR FORM ID>",
+    colorConfiguration: colorConfiguration
+)
 ```
-Styleguide properties:
+ColorConfiguration properties:
 ```swift
-public struct Styleguide {
-
+public struct ColorConfiguration {
+    
+    /// Background color of the screens being presented
     public let backgroundColor: UIColor
-    public let titleColor: UIColor
-    public let subtitleColor: UIColor
-    public let sectionHeaderTitleColor: UIColor
-    public let cellBackgroundColor: UIColor
-    public let emphesizedCellBackgroundColor: UIColor
-    public let cellTextColor: UIColor
-    public let emphesizedCellTextColor: UIColor
-    public let cellTextPlaceholderColor: UIColor
-    public let navigationButtonColor: UIColor
-    public let segmentedControlSelectionColor: UIColor
+    
+    /// Main color of the SDK. It’s used for high-emphasis interactive elements like:
+    /// - action buttons (e.g., “Continue”, “Submit”)
+    /// - active elements (e.g., selected items, active radio buttons)
+    /// - progress indicators
+    /// - hyperlinks
+    public let primaryColor: UIColor
+    
+    /// Secondary color of the SDK. It’s used for lower-priority elements:
+    /// - secondary action buttons
+    /// - icons or borders for secondary elements
+    /// - labels with lower emphasis
+    /// - selection indication in the list
+    public let secondaryColor: UIColor
+    
+    /// Color of the content (e.g. text, icons) placed in UI elements which have `secondaryColor` as a background color
+    public let onSecondaryColor: UIColor
+    
+    /// Background color for surfaces, containers, or elevated elements. Usually used for popups, modals, bottom sheets
+    public let surfaceColor: UIColor
+    
+    /// Color of the content (e.g. text, icons) placed in UI elements which have `surfaceColor` as a background color
+    public let onSurfaceColor: UIColor
+    
+    /// Color used as a background color for cards (rectangles with rounded corners containing some UI elements)
+    public let cardBackgroundColor: UIColor
+    
+    /// Primary text color
+    public let textPrimaryColor: UIColor
+    
+    /// Secondary text color
+    public let textSecondaryColor: UIColor
+    
+    /// Border color of normal text field
+    public let textfieldBorderColor: UIColor
+    
+    /// Border color of disabled text field
+    public let disabledTextfieldBorderColor: UIColor
+    
+    /// Border color of focused text field
+    public let focusedTextfieldBorderColor: UIColor
+    
+    /// Placeholder color in text fields
+    public let textfieldPlaceholderColor: UIColor
+    
+    /// Background color of the navigation bar
+    public let navigationBarColor: UIColor
+    
+    /// Text color in the navigation bar
+    public let navigationBarTextColor: UIColor
+    
+    /// Background color of normal buttons
+    public let buttonBackgroundColor: UIColor
+    
+    /// Background color of disabled buttons
+    public let disabledButtonBackgroundColor: UIColor
+    
+    /// Text color in normal buttons
+    public let buttonTextColor: UIColor
+    
+    /// Text color in disabled buttons
+    public let disabledButtonTextColor: UIColor
+    
+    /// Border color of outlined buttons
+    public let outlinedButtonBorderColor: UIColor
+    
+    /// Text color in outlined buttons
+    public let outlinedButtonTextColor: UIColor
+    
+    /// Color for pending indication
+    public let pendingColor: UIColor
+    
+    /// Color for success indication
+    public let successColor: UIColor
+    
+    /// Color for error indication
+    public let errorColor: UIColor
 }
 ```
 Note that each property has its default value, so you can change only those you need.
+
 **Example**
 <p float="center">
-    <img src="https://user-images.githubusercontent.com/1411778/111072909-48483100-84e5-11eb-8fb0-78f775d3ac63.PNG" width="240">
-    <img src="https://user-images.githubusercontent.com/1411778/111072913-4d0ce500-84e5-11eb-8fbe-5d8b3c90c382.PNG" width="240">
+    <img src="/images/colors_1.PNG" width="240">
+    <img src="/images/colors_2.PNG" width="240">
+</p>
+<p float="center">
+    <img src="/images/colors_3.PNG" width="240">
+    <img src="/images/colors_4.PNG" width="240">
 </p>
 
 ## Notes
@@ -184,32 +266,60 @@ SDK uses Camera and Photos Library to make photo verification possible, so next 
 
 ```
 #### Info.plist:
-![Xcode Screenshot](/logo/info_plist.png)
+![Xcode Screenshot](/images/info_plist.png)
 
 ## Screenshots
 
 <p float="center">
-  <img src="/logo/screenshots/1.PNG" width="240" />
-  <img src="/logo/screenshots/5.PNG" width="240" /> 
-  <img src="/logo/screenshots/6.PNG" width="240" />
+  <img src="/images/screenshots/1.PNG" width="240" />
+  <img src="/images/screenshots/2.PNG" width="240" /> 
+  <img src="/images/screenshots/3.PNG" width="240" />
 </p>
 <p float="center">
-  <img src="/logo/screenshots/4.PNG" width="240" />
-  <img src="/logo/screenshots/3.PNG" width="240" /> 
-  <img src="/logo/screenshots/2.PNG" width="240" />
+  <img src="/images/screenshots/4.PNG" width="240" />
+  <img src="/images/screenshots/5.PNG" width="240" /> 
+  <img src="/images/screenshots/6.PNG" width="240" />
+</p>
+<p float="center">
+  <img src="/images/screenshots/7.PNG" width="240" />
+  <img src="/images/screenshots/8.PNG" width="240" /> 
+  <img src="/images/screenshots/9.PNG" width="240" />
+</p>
+<p float="center">
+  <img src="/images/screenshots/10.PNG" width="240" />
+  <img src="/images/screenshots/11.PNG" width="240" /> 
+  <img src="/images/screenshots/12.PNG" width="240" />
 </p>
 
 ## Localization
 
-KYCAID SDK Supports:
+KYCAID SDK supports following languages:
 
 * English
-* Ukrainian
+* Azeybarjan
+* Brunei
+* German
+* Spanish
+* Spanish (Mexico)
+* French
+* French (Canada)
+* Hindi
+* Croatian
+* Hebrew
+* Yiddish
+* Kazakh
+* Dutch
+* Polish
+* Portuguese
+* Portuguese (Brazil)
+* Romanian
 * Russian
-
-## Todo
-
-* Example Project
+* Serbian
+* Tajik
+* Turkish
+* Ukrainian
+* Uzbek
+* Chinese
 
 ## Links
 
