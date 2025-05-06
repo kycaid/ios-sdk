@@ -51,6 +51,13 @@ After installation, import SDK to your project by adding this:
 import KYCAIDSDK
 ```
 
+### Required Dependencies
+
+You must also add the following dependencies:
+
+- [RxSwift](https://github.com/ReactiveX/RxSwift) (`6.7.1`)
+- [Lottie](https://github.com/airbnb/lottie-spm) (`4.5.1`)
+
 ## Usage
 
 ### Setup SDK
@@ -119,22 +126,47 @@ public struct VerificationInfo {
 
 ### Handle possible errors and cancellation:
 
-If user cancels verification flow, or some error occured, the completion is invoked with `Error` as a result.
+If user cancels verification flow, or some error occured, the completion is invoked with `KycaidError` as a result.
 ```swift
 sdk.startVerification(containerViewController: self) { result in
     switch result {
     case .success(let verificationInfo):
-        //Handle verificationInfo
+        // Handle verificationInfo
     case .failure(let error):
         switch error {
-        case KYCAID.SDKError.cancelled:
-            //Handle cancellation
+        case .cancelled:
+            // Handle cancellation
         default:
-            //Handle generic error
+            // Handle other errors
         }
     }
 }
 ```
+KycaidError:
+```swift
+public enum KycaidError: String, LocalizedError {
+    case unauthorized = "unauthorized"
+    case inactiveAccount = "inactive_account"
+    case insufficientFunds = "insufficient_funds"
+    case notFound = "not_found"
+    case requestTimeout = "request_timeout"
+    case duplicateData = "duplicate_data"
+    case flow = "flow"
+    case editDenied = "edit_denied"
+    case deleteDenied = "delete_denied"
+    case validation = "validation"
+    case applicantExists = "applicant_exists"
+    case verificationExists = "verification_exists"
+    case insufficientData = "insufficient_data"
+    case limitExceeded = "limit_exceeded"
+    case internalServer = "internal_server"
+    case failedToCreateVerification = "failed_to_create_verification"
+    case genericError = "generic_error"
+    case cancelled = "cancelled"
+}
+```
+You can find explanation of every error in the API documentation here: https://docs.kycaid.com/#errors
+
 
 ### Get verification status
 
@@ -320,6 +352,11 @@ KYCAID SDK supports following languages:
 * Ukrainian
 * Uzbek
 * Chinese
+* Indonesian
+* Georgian
+* Malay
+* Thai
+* Vietnamese
 
 ## Links
 
