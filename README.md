@@ -4,14 +4,21 @@
 
 ## Contents
 
-* [How to install from Xcode](#how-to-install-from-xcode)
-* [How to install manually](#how-to-install-manually)
-* [Setup SDK](#setup-sdk)
-* [Run verification flow](#run-verification-flow)
-* [Handle verification result](#handle-verification-result)
-* [Handle possible errors and cancellation](#handle-possible-errors-and-cancellation)
-* [Get verification status](#get-verification-status)
-* [Interface customization](#customization)
+* [Integration](#integration)
+    - [How to install from Xcode](#how-to-install-from-xcode)
+    - [How to install manually](#how-to-install-manually)
+    - [Required Dependencies](#required-dependencies)
+* [Usage](#usage)
+    - [Setup SDK](#setup-sdk)
+    - [Run verification flow](#run-verification-flow)
+    - [Handle verification result](#handle-verification-result)
+    - [Handle possible errors and cancellation](#handle-possible-errors-and-cancellation)
+    - [Get verification status](#get-verification-status)
+* [UI customization](#ui-customization)
+* [Useful notes](#notes)
+* [Screenshots](#screenshots)
+* [Localization](#localization)
+* [Useful links](#links)
 
 ## Requirements
 
@@ -67,17 +74,34 @@ Grab api token and form identifier from the [Dashboard](https://app.kycaid.com/d
 ```swift
 let sdk = KYCAID(apiToken: "<YOUR API TOKEN>", formId: "<YOUR FORM ID>")
 ```
-You can also specify the applicant ID, the color configuration and the default language in which the verification will be run.
+You can also specify already existing applicant ID, external applicant ID, environment, color configuration and default language.
 ```swift
 let sdk = KYCAID(
     apiToken: "<YOUR API TOKEN>",
     formId: "<YOUR FORM ID>",
-    applicantId: "<ApplicantID>",
-    colorConfiguration: ...,
-    languageCode: "en"
+    applicantId: "<Applicant ID>",
+    externalApplicantId: "<External Applicant ID>",
+    environment: <Environment>,
+    colorConfiguration: <ColorConfiguration>,
+    languageCode: "<Language Code>"
 )
 ```
-See [Interface customization](#customization) to get more details about `ColorConfiguration`.
+
+`apiToken` – authorization token obtained from the dashboard
+
+`formId` – ID of the verification form obtained from the dashboard
+
+`applicantId` – ID of the already existing applicant. Default value: `nil`, it means that fresh applicant will be created
+
+`externApplicantId` – ID of the external applicant, needed for binding the external applicant to the applicant created in the KYCAID system. Default value: `nil`
+
+`environment` – flag which determines which API will be used, `stg-api` or `api`, that is staging or production environment. Default value: `production`
+
+`colorConfiguration` – special configuration for color customization. Default value: `KYCAID colors`
+
+`languageCode` – code of the language in which the form will be run by default. Default value: `nil`
+
+See [UI customization](#ui-customization) to get more details about `ColorConfiguration`.
 
 ### Run verification flow
 
@@ -95,7 +119,7 @@ public func startVerification(containerViewController: UIViewController, complet
 // Usage
 
 sdk.startVerification(containerViewController: self) { result in
-    //Handle verification result here
+    // Handle verification result here
 }
 ```
 Basically, this is all you need to start a verification. 
@@ -179,7 +203,7 @@ Once you have `verificationId` it's possible to check the verification status.
 public func retrieveVerificationState(verificationId: String, completion: @escaping ((Result<KYCAIDSDK.KYCAID.VerificationState, Error>) -> Void))
 ```
 
-## Customization
+## UI customization
 
 KYCAID SDK supports basic UI customization. 
 To change UI element colors you can pass `ColorConfiguration` structure to SDK initialization:
@@ -357,6 +381,10 @@ KYCAID SDK supports following languages:
 * Malay
 * Thai
 * Vietnamese
+* Finnish
+* Japanese
+* Korean
+* Norwegian
 
 ## Links
 
