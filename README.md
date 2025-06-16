@@ -1,6 +1,6 @@
 # Official KYCAID iOS SDK
 
-![GitHub Logo](/images/logo_new_entry.png)
+![GitHub Logo](/images/logo.png)
 
 ## Contents
 
@@ -69,6 +69,7 @@ You must also add the following dependencies:
 
 ### Setup SDK
 
+#### By API Token and Form ID:
 Initialize `KYCAID` instance as early as possible. 
 Grab api token and form identifier from the [Dashboard](https://app.kycaid.com/dashboard)
 ```swift
@@ -103,6 +104,15 @@ let sdk = KYCAID(
 
 See [UI customization](#ui-customization) to get more details about `ColorConfiguration`.
 
+#### By Form Token:
+Or if you don't want to hold `apiToken` and `formId` in your app, then you can initialize `KYCAID` with `formToken` only that you have to first generate yourself (see this endpoint https://docs.kycaid.com/api/forms/form-get-url). And make sure that you pass applicant ID to the constructor when `formToken` is generated with applicant binding (you passed `applicantId` to the `form-get-url` request body).
+```swift
+let sdk = KYCAID(
+    formToken: "<FORM TOKEN>",
+    applicantId: "<Applicant ID>"
+)
+```
+
 ### Run verification flow
 
 Once you are done with the setup, you can run verification flow. You must provide content view controller, so SDK is able to show its UI.
@@ -126,7 +136,7 @@ Basically, this is all you need to start a verification.
 
 As a result of this call, first verification step should appear:
 
-<img src="/images/first_step.PNG" width="320">
+<img src="/images/screenshots/1.PNG" width="320">
 
 Further, all required verification steps will be opened automatically, based on your form setup.
 
@@ -172,6 +182,11 @@ public enum KycaidError: String, LocalizedError {
     case unauthorized = "unauthorized"
     case inactiveAccount = "inactive_account"
     case insufficientFunds = "insufficient_funds"
+    case forbiddenDuplicatesRetries = "forbidden_duplicates_retries"
+    case forbiddenAgeRestrictedRetries = "forbidden_age_restricted_retries"
+    case forbiddenCountryRestrictedRetries = "forbidden_country_restricted_retries"
+    case forbiddenCompromisedPersonRetries = "forbidden_compromised_person_retries"
+    case forbiddenFakeDocumentRetries = "forbidden_fake_document_retries"
     case notFound = "not_found"
     case requestTimeout = "request_timeout"
     case duplicateData = "duplicate_data"
@@ -344,7 +359,6 @@ SDK uses Camera and Photos Library to make photo verification possible, so next 
 <p float="center">
   <img src="/images/screenshots/10.PNG" width="240" />
   <img src="/images/screenshots/11.PNG" width="240" /> 
-  <img src="/images/screenshots/12.PNG" width="240" />
 </p>
 
 ## Localization
