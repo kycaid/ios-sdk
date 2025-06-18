@@ -235,96 +235,115 @@ ColorConfiguration properties:
 public struct ColorConfiguration {
     
     /// Background color of the screens being presented
-    public let backgroundColor: UIColor
+    public let backgroundColor: UIColor?
     
     /// Main color of the SDK. It’s used for high-emphasis interactive elements like:
     /// - action buttons (e.g., “Continue”, “Submit”)
     /// - active elements (e.g., selected items, active radio buttons)
     /// - progress indicators
     /// - hyperlinks
-    public let primaryColor: UIColor
+    public let primaryColor: UIColor?
     
     /// Secondary color of the SDK. It’s used for lower-priority elements:
     /// - secondary action buttons
     /// - icons or borders for secondary elements
     /// - labels with lower emphasis
     /// - selection indication in the list
-    public let secondaryColor: UIColor
+    public let secondaryColor: UIColor?
     
     /// Color of the content (e.g. text, icons) placed in UI elements which have `secondaryColor` as a background color
-    public let onSecondaryColor: UIColor
+    public let onSecondaryColor: UIColor?
     
     /// Background color for surfaces, containers, or elevated elements. Usually used for popups, modals, bottom sheets
-    public let surfaceColor: UIColor
+    public let surfaceColor: UIColor?
     
     /// Color of the content (e.g. text, icons) placed in UI elements which have `surfaceColor` as a background color
-    public let onSurfaceColor: UIColor
+    public let onSurfaceColor: UIColor?
     
     /// Color used as a background color for cards (rectangles with rounded corners containing some UI elements)
-    public let cardBackgroundColor: UIColor
+    public let cardBackgroundColor: UIColor?
+    
+    /// Color used as a border color for cards (rectangles with rounded corners containing some UI elements)
+    public let cardBorderColor: UIColor?
     
     /// Primary text color
-    public let textPrimaryColor: UIColor
+    public let textPrimaryColor: UIColor?
     
     /// Secondary text color
-    public let textSecondaryColor: UIColor
+    public let textSecondaryColor: UIColor?
     
     /// Border color of normal text field
-    public let textfieldBorderColor: UIColor
+    public let textfieldBorderColor: UIColor?
     
     /// Border color of disabled text field
-    public let disabledTextfieldBorderColor: UIColor
+    public let disabledTextfieldBorderColor: UIColor?
     
     /// Border color of focused text field
-    public let focusedTextfieldBorderColor: UIColor
+    public let focusedTextfieldBorderColor: UIColor?
     
     /// Placeholder color in text fields
-    public let textfieldPlaceholderColor: UIColor
+    public let textfieldPlaceholderColor: UIColor?
     
     /// Background color of the navigation bar
-    public let navigationBarColor: UIColor
+    public let navigationBarBackgroundColor: UIColor?
+    
+    /// Border color of the navigation bar
+    public let navigationBarBorderColor: UIColor?
+    
+    /// Tint color of the back button
+    public let backButtonColor: UIColor?
     
     /// Text color in the navigation bar
-    public let navigationBarTextColor: UIColor
+    public let navigationBarTextColor: UIColor?
     
     /// Background color of normal buttons
-    public let buttonBackgroundColor: UIColor
+    public let buttonBackgroundColor: UIColor?
     
     /// Background color of disabled buttons
-    public let disabledButtonBackgroundColor: UIColor
+    public let disabledButtonBackgroundColor: UIColor?
     
     /// Text color in normal buttons
-    public let buttonTextColor: UIColor
+    public let buttonTextColor: UIColor?
     
     /// Text color in disabled buttons
-    public let disabledButtonTextColor: UIColor
+    public let disabledButtonTextColor: UIColor?
     
     /// Border color of outlined buttons
-    public let outlinedButtonBorderColor: UIColor
+    public let outlinedButtonBorderColor: UIColor?
     
     /// Text color in outlined buttons
-    public let outlinedButtonTextColor: UIColor
+    public let outlinedButtonTextColor: UIColor?
     
     /// Color for pending indication
-    public let pendingColor: UIColor
+    public let pendingColor: UIColor?
     
     /// Color for success indication
-    public let successColor: UIColor
+    public let successColor: UIColor?
     
     /// Color for error indication
-    public let errorColor: UIColor
+    public let errorColor: UIColor?
+    
+    /// Color of dividers
+    public let dividerColor: UIColor?
 }
 ```
 Note that each property has its default value, so you can change only those you need.
 
-**Example**
+**Examples**
 <p float="center">
     <img src="/images/colors_1.PNG" width="240">
     <img src="/images/colors_2.PNG" width="240">
+    <img src="/images/colors_3.PNG" width="240">
 </p>
 <p float="center">
-    <img src="/images/colors_3.PNG" width="240">
     <img src="/images/colors_4.PNG" width="240">
+    <img src="/images/colors_5.PNG" width="240">
+    <img src="/images/colors_6.PNG" width="240">
+</p>
+<p float="center">
+    <img src="/images/colors_7.PNG" width="240">
+    <img src="/images/colors_8.PNG" width="240">
+    <img src="/images/colors_9.PNG" width="240">
 </p>
 
 ## Notes
