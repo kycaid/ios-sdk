@@ -83,8 +83,8 @@ let sdk = KYCAID(
     applicantId: "<Applicant ID>",
     externalApplicantId: "<External Applicant ID>",
     environment: <Environment>,
-    colorConfiguration: <ColorConfiguration>,
-    languageCode: "<Language Code>"
+    languageCode: "<Language Code>",
+    theme: <KycaidTheme>
 )
 ```
 
@@ -98,11 +98,9 @@ let sdk = KYCAID(
 
 `environment` – flag which determines which API will be used, `stg-api` or `api`, that is staging or production environment. Default value: `production`
 
-`colorConfiguration` – special configuration for color customization. Default value: `KYCAID colors`
-
 `languageCode` – code of the language in which the form will be run by default. Default value: `nil`
 
-See [UI customization](#ui-customization) to get more details about `ColorConfiguration`.
+`theme` – SDK theme, intended for UI customisation. See [UI customization](#ui-customization) to get more details about `KycaidTheme`.
 
 #### By Form Token:
 Or if you don't want to hold `apiToken` and `formId` in your app, then you can initialize `KYCAID` with `formToken` only that you have to first generate yourself (see this endpoint https://docs.kycaid.com/api/forms/form-get-url). And make sure that you pass applicant ID to the constructor when `formToken` is generated with applicant binding (you passed `applicantId` to the `form-get-url` request body).
@@ -220,131 +218,281 @@ public func retrieveVerificationState(verificationId: String, completion: @escap
 
 ## UI customization
 
-KYCAID SDK supports basic UI customization. 
-To change UI element colors you can pass `ColorConfiguration` structure to SDK initialization:
+KYCAID SDK supports basic UI customization. You can specify a huge amount of colors for UI elements of the SDK. All you need is build KycaidTheme with help of KycaidThemeBuilder like this:
 ```swift
-let colorConfiguration = ColorConfiguration(<your params here>)
+let customTheme = KycaidThemeBuilder()
+    .colorScheme(.init(
+        backgroundColor: .gray,
+        primaryColor = .yellow,
+        textPrimaryColor = .blue,
+        textSecondaryColor = .cyan
+    ))
+    .build()
 let sdk = KYCAID(
     apiToken: "<YOUR API TOKEN>",
     formId: "<YOUR FORM ID>",
-    colorConfiguration: colorConfiguration
+    theme: customTheme
 )
 ```
-ColorConfiguration properties:
+Here are all the colors you can change:
 ```swift
-public struct ColorConfiguration {
+public struct KycaidTheme {
     
-    /// Background color of the screens being presented
-    public let backgroundColor: UIColor?
+    public let colorScheme: ColorScheme
+    public let cardColors: CardColors
+    public let textFieldColors: TextFieldColors
+    public let dropdownColors: DropdownColors
+    public let radioButtonColors: RadioButtonColors
+    public let checkBoxColors: CheckBoxColors
+    public let navigationBarColors: NavigationBarColors
+    public let buttonColors: ButtonColors
+    public let outlinedButtonColors: OutlinedButtonColors
+    public let documentTypeButtonColors: DocumentTypeButtonColors
     
-    /// Main color of the SDK. It’s used for high-emphasis interactive elements like:
-    /// - action buttons (e.g., “Continue”, “Submit”)
-    /// - active elements (e.g., selected items, active radio buttons)
-    /// - progress indicators
-    /// - hyperlinks
-    public let primaryColor: UIColor?
+    public struct ColorScheme {
+        /// The main background color used for screens.
+        public let backgroundColor: UIColor?
+        
+        /// The primary brand color used for major UI elements and key actions such as:
+        /// - action buttons (e.g., “Continue”, “Submit”)
+        /// - active elements (e.g., selected and focused elements, radio buttons and check boxes)
+        /// - progress indicators
+        /// - hyperlinks
+        /// - cursor color in text fields
+        /// - checkmarks (e.g. on the verification status screen)
+        /// - countdown timers (e.g. during the document preprocessing)
+        /// **Unless it's not overridden by component-specific colors**
+        public let primaryColor: UIColor?
+        
+        /// The color used for text and icons displayed on top of `primaryColor` backgrounds.
+        public let onPrimaryColor: UIColor?
+        
+        /// The secondary accent color, used to highlight secondary actions or elements,
+        /// such as selection indication in dropdown lists (e.g. language dropdown list).
+        public let secondaryColor: UIColor?
+        
+        /// The color used for text and icons displayed on top of `secondaryColor` backgrounds.
+        public let onSecondaryColor: UIColor?
+        
+        /// The tertiary accent color, intended for decorative elements such as the stars in the instructions.
+        public let tertiaryColor: UIColor?
+        
+        /// Background color for surfaces and elevated elements. Usually used for dropdown lists.
+        public let surfaceColor: UIColor?
+        
+        /// The color used for text and icons displayed on top of `surfaceColor` backgrounds.
+        public let onSurfaceColor: UIColor?
+        
+        /// The color used for borders of primary elements such as:
+        /// - cards
+        /// - text fields
+        /// - radio buttons
+        /// - check boxes
+        /// - other elements that have border
+        /// **Unless it's not overridden by component-specific colors**
+        public let primaryBorderColor: UIColor?
+        
+        /// The primary text color used for most text in the SDK.
+        public let textPrimaryColor: UIColor?
+        
+        /// The secondary text color used for supporting or less prominent text, such as instructions, subtitles, error descriptions.
+        public let textSecondaryColor: UIColor?
+        
+        /// The color used for hyperlink text and interactive links.
+        /// Defaults to `primaryColor` unless explicitly specified.
+        public let hyperlinkColor: UIColor?
+        
+        /// The color used to indicate pending statuses.
+        public let pendingColor: UIColor?
+        
+        /// The color used to indicate successful statuses.
+        public let successColor: UIColor?
+        
+        /// The color used to indicate errors, failures, or negative statuses.
+        public let errorColor: UIColor?
+        
+        /// The color used for divider lines between content and control elements,
+        /// such as the divider between the document info and the "Submit" button.
+        public let dividerColor: UIColor?
+    }
     
-    /// Secondary color of the SDK. It’s used for lower-priority elements:
-    /// - secondary action buttons
-    /// - icons or borders for secondary elements
-    /// - labels with lower emphasis
-    /// - selection indication in the list
-    public let secondaryColor: UIColor?
+    public struct CardColors {
+        /// The background color of cards and card-like surfaces.
+        public let backgroundColor: UIColor?
+        
+        /// The border color of cards.
+        /// Defaults to `primaryBorderColor` unless explicitly specified.
+        public let borderColor: UIColor?
+        
+        /// The color used for text and icons displayed on cards.
+        public let onCardColor: UIColor?
+    }
     
-    /// Color of the content (e.g. text, icons) placed in UI elements which have `secondaryColor` as a background color
-    public let onSecondaryColor: UIColor?
+    public struct TextFieldColors {
+        /// The background color of text fields.
+        public let backgroundColor: UIColor?
+        
+        /// The border color of text fields.
+        /// Defaults to `primaryBorderColor` unless explicitly specified.
+        public let borderColor: UIColor?
+        
+        /// The color of entered text in text fields.
+        public let textColor: UIColor?
+        
+        /// The color of placeholder in text fields.
+        public let placeholderColor: UIColor?
+        
+        /// The color of the text cursor in text fields.
+        /// Defaults to `primaryColor` unless explicitly specified.
+        public let cursorColor: UIColor?
+        
+        /// The background color of disabled text fields.
+        public let disabledBackgroundColor: UIColor?
+        
+        /// The border color of disabled text fields.
+        public let disabledBorderColor: UIColor?
+        
+        /// The color of entered text in disabled text fields.
+        public let disabledTextColor: UIColor?
+        
+        /// The color of placeholder in disabled text fields.
+        public let disabledPlaceholderColor: UIColor?
+        
+        /// The border color of focused text fields.
+        /// Defaults to `primaryColor` unless explicitly specified.
+        public let focusedBorderColor: UIColor?
+    }
     
-    /// Background color for surfaces, containers, or elevated elements. Usually used for popups, modals, bottom sheets
-    public let surfaceColor: UIColor?
+    public struct DropdownColors {
+        /// The background color of the dropdown button (the view that triggers the list showing).
+        public let backgroundColor: UIColor?
+        
+        /// The border color of the dropdown button.
+        /// Defaults to `primaryBorderColor` unless explicitly specified.
+        public let borderColor: UIColor?
+        
+        /// The color of text in the dropdown button.
+        public let textColor: UIColor?
+        
+        /// The color of placeholder in the dropdown button.
+        public let placeholderColor: UIColor?
+        
+        /// The tint color for the dropdown arrow icon.
+        public let arrowTintColor: UIColor?
+        
+        /// The border color of the focused dropdown button.
+        /// Defaults to `primaryColor` unless explicitly specified.
+        public let focusedBorderColor: UIColor?
+    }
     
-    /// Color of the content (e.g. text, icons) placed in UI elements which have `surfaceColor` as a background color
-    public let onSurfaceColor: UIColor?
+    public struct RadioButtonColors {
+        /// The background color of radio buttons.
+        public let backgroundColor: UIColor?
+        
+        /// The border color of radio buttons.
+        /// Defaults to `primaryBorderColor` unless explicitly specified.
+        public let borderColor: UIColor?
+        
+        /// The color of text labels associated with radio buttons.
+        public let textColor: UIColor?
+        
+        /// The tint color applied to the radio button indicator.
+        /// Defaults to `primaryColor` unless explicitly specified.
+        public let buttonTintColor: UIColor?
+    }
     
-    /// Color used as a background color for cards (rectangles with rounded corners containing some UI elements)
-    public let cardBackgroundColor: UIColor?
+    public struct CheckBoxColors {
+        /// The background color of checkboxes.
+        public let backgroundColor: UIColor?
+        
+        /// The border color of checkboxes.
+        /// Defaults to `primaryBorderColor` unless explicitly specified.
+        public let borderColor: UIColor?
+        
+        /// The color of text labels associated with checkboxes.
+        public let textColor: UIColor?
+        
+        /// The tint color applied to the checkbox checkmark (when it's checked).
+        /// Defaults to `primaryColor` unless explicitly specified.
+        public let buttonTintColor: UIColor?
+    }
     
-    /// Color used as a border color for cards (rectangles with rounded corners containing some UI elements)
-    public let cardBorderColor: UIColor?
+    public struct NavigationBarColors {
+        /// The background color of the navigation bar (or top bar).
+        public let backgroundColor: UIColor?
+        
+        /// The border color of the navigation bar.
+        public let borderColor: UIColor?
+        
+        /// The color of the navigation bar text.
+        public let textColor: UIColor?
+        
+        /// The tint color for the back button icon in the navigation bar.
+        public let backButtonTintColor: UIColor?
+        
+        /// The tint color for the language icon in the navigation bar.
+        public let languageIconTintColor: UIColor?
+    }
     
-    /// Primary text color
-    public let textPrimaryColor: UIColor?
+    public struct ButtonColors {
+        /// The background color of normal buttons.
+        /// Defaults to `primaryColor` unless explicitly specified.
+        public let backgroundColor: UIColor?
+        
+        /// The color of text and icons in normal buttons.
+        /// Defaults to `onPrimaryColor` unless explicitly specified.
+        public let textColor: UIColor?
+        
+        /// The background color of disabled buttons.
+        /// Defaults to `backgroundColor` with alpha 0.4 unless explicitly specified.
+        public let disabledBackgroundColor: UIColor?
+        
+        /// The color of text and icons in disabled buttons.
+        public let disabledTextColor: UIColor?
+    }
     
-    /// Secondary text color
-    public let textSecondaryColor: UIColor?
+    public struct OutlinedButtonColors {
+        /// The background color of outlined buttons.
+        /// Transparent by default unless explicitly specified.
+        public let backgroundColor: UIColor?
+        
+        /// The border color of outlined buttons.
+        /// Defaults to `textPrimaryColor` unless explicitly specified.
+        public let borderColor: UIColor?
+        
+        /// The color of text and icons in outlined buttons.
+        /// Defaults to `textPrimaryColor` unless explicitly specified.
+        public let textColor: UIColor?
+    }
     
-    /// Border color of normal text field
-    public let textfieldBorderColor: UIColor?
-    
-    /// Border color of disabled text field
-    public let disabledTextfieldBorderColor: UIColor?
-    
-    /// Border color of focused text field
-    public let focusedTextfieldBorderColor: UIColor?
-    
-    /// Placeholder color in text fields
-    public let textfieldPlaceholderColor: UIColor?
-    
-    /// Background color of the navigation bar
-    public let navigationBarBackgroundColor: UIColor?
-    
-    /// Border color of the navigation bar
-    public let navigationBarBorderColor: UIColor?
-    
-    /// Tint color of the back button
-    public let backButtonColor: UIColor?
-    
-    /// Text color in the navigation bar
-    public let navigationBarTextColor: UIColor?
-    
-    /// Background color of normal buttons
-    public let buttonBackgroundColor: UIColor?
-    
-    /// Background color of disabled buttons
-    public let disabledButtonBackgroundColor: UIColor?
-    
-    /// Text color in normal buttons
-    public let buttonTextColor: UIColor?
-    
-    /// Text color in disabled buttons
-    public let disabledButtonTextColor: UIColor?
-    
-    /// Border color of outlined buttons
-    public let outlinedButtonBorderColor: UIColor?
-    
-    /// Text color in outlined buttons
-    public let outlinedButtonTextColor: UIColor?
-    
-    /// Color for pending indication
-    public let pendingColor: UIColor?
-    
-    /// Color for success indication
-    public let successColor: UIColor?
-    
-    /// Color for error indication
-    public let errorColor: UIColor?
-    
-    /// Color of dividers
-    public let dividerColor: UIColor?
+    public struct DocumentTypeButtonColors {
+        /// The background color of document type selection buttons.
+        public let backgroundColor: UIColor?
+        
+        /// The border color of document type selection buttons.
+        public let borderColor: UIColor?
+        
+        /// The color of text in document type selection buttons.
+        public let textColor: UIColor?
+        
+        /// The background color of the document icon in selection buttons.
+        public let iconBackgroundColor: UIColor?
+        
+        /// The tint color applied to the document icon in selection buttons.
+        public let iconTintColor: UIColor?
+        
+        /// The background color when a document type button is selected.
+        public let selectedBackgroundColor: UIColor?
+        
+        /// The border color when a document type button is selected.
+        public let selectedBorderColor: UIColor?
+        
+        /// The text color when a document type button is selected.
+        public let selectedTextColor: UIColor?
+    }
 }
 ```
 Note that each property has its default value, so you can change only those you need.
-
-**Examples**
-<p float="center">
-    <img src="/images/colors_1.PNG" width="240">
-    <img src="/images/colors_2.PNG" width="240">
-    <img src="/images/colors_3.PNG" width="240">
-</p>
-<p float="center">
-    <img src="/images/colors_4.PNG" width="240">
-    <img src="/images/colors_5.PNG" width="240">
-    <img src="/images/colors_6.PNG" width="240">
-</p>
-<p float="center">
-    <img src="/images/colors_7.PNG" width="240">
-    <img src="/images/colors_8.PNG" width="240">
-    <img src="/images/colors_9.PNG" width="240">
-</p>
 
 ## Notes
 
