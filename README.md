@@ -551,7 +551,8 @@ KYCAID SDK supports following languages:
 * Portuguese (Brazil)
 * Romanian
 * Russian
-* Serbian
+* Serbian (Cyrillic)
+* Serbian (Latin)
 * Tajik
 * Turkish
 * Ukrainian
@@ -566,6 +567,10 @@ KYCAID SDK supports following languages:
 * Japanese
 * Korean
 * Norwegian
+* Hungarian
+* Nepali
+* Sinhala
+* Tamil
 
 ## Links
 
