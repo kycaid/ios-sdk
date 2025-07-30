@@ -143,20 +143,28 @@ Further, all required verification steps will be opened automatically, based on 
 Once user done with the verification flow, the completion is invoked with `VerificationInfo` as a result
 ```swift
 /// Result structure that is passed into verification completion
-public struct VerificationInfo {
-
+struct VerificationInfo {
+    
     /// Verification identifier.
     public let verificationId: String
-
+    
     /// Applicant identifier. Optional. Will be nll in case of external verification.
     public let applicantId: String?
-
+    
     /// Applicant info. Optional. Will be nll in case of external verification.
-    public let applicantInfo: KYCAIDSDK.ApplicantInfo?
+    public let applicantInfo: ApplicantInfo?
+    
+    /// Current verification status at the time of closing the SDK
+    public let currentVerificationStatus: VerificationStatus
+}
+
+/// Represents the verification status
+enum VerificationStatus {
+    case pending, approved, declined
 }
 ```
 
-### Handle possible errors and cancellation:
+### Handle possible errors and cancellation
 
 If user cancels verification flow, or some error occured, the completion is invoked with `KycaidError` as a result.
 ```swift
@@ -202,7 +210,7 @@ public enum KycaidError: String, LocalizedError {
     case cancelled = "cancelled"
 }
 ```
-You can find explanation of every error in the API documentation here: https://docs.kycaid.com/#errors
+You can find explanation of every error in the API documentation here: https://docs-v1.kycaid.com/#errors
 
 
 ### Get verification status
@@ -214,6 +222,50 @@ Once you have `verificationId` it's possible to check the verification status.
 ///   - verificationId: The identifier of the verification. See `startVerification` for details
 ///   - completion: Completion that helds the result
 public func retrieveVerificationState(verificationId: String, completion: @escaping ((Result<KYCAIDSDK.KYCAID.VerificationState, Error>) -> Void))
+```
+This method returns `VerificationState` which contains the verification status and the verification steps with their particular statuses:
+```swift
+/// Represents the verification state
+struct VerificationState {
+    
+    /// Represents the type of verification step
+    public enum VerificationType: String {
+        case profile = "profile"
+        case document = "document"
+        case facial = "facial"
+        case address = "address"
+        case databaseScreening = "database_screening"
+        case questionnaire = "questionnaire"
+    }
+    
+    /// State of the concrete verification step
+    public struct Verification {
+        public let type: VerificationType
+        public let status: VerificationStatus
+        public let comment: String?
+        public let declineReasons: [DeclineReason]
+    }
+    
+    /// Reasons why a verification has been declined
+    public enum DeclineReason: String, Codable {
+        case other, wrongName, wrongDob, ageRestriction, expiredDocument, badQuality, fakeDocument,
+             wrongInfo, prohibitedJurisdiction, noSelfie, differentFaces, wrongDocument, duplicate,
+             documentDamaged, documentIncomplete, fraudulent, taxIdRequired, compromisedPerson, editedDocument,
+             multiplePerson, compulsion, limitReachedOtp, ipMismatch, anonymizingNetwork, qesMismatch, debtor
+    }
+    
+    /// Verification identifier
+    public let verificationId: String
+    
+    /// Identifier of the applicant who is being verified
+    public let applicantId: String
+    
+    /// Overall verification status. Possible values: pending, approved, declined
+    public let status: VerificationStatus
+    
+    /// States of the concrete verification steps
+    public let verifications: [Verification]
+}
 ```
 
 ## UI customization
