@@ -27,6 +27,8 @@
 
 ## Integration
 
+> If you are working with [Flutter](https://docs.flutter.dev/), you can take a look at this [quick guide](https://github.com/kycaid/ios-sdk/blob/master/Flutter%20Integration%20Guide.md) to integrating the KYCAID SDK into a Flutter app.
+
 KYCAID SDK is currently available via:
 
 * [Swift Package Manager](https://swift.org/package-manager/)
@@ -62,7 +64,7 @@ import KYCAIDSDK
 
 You must also add the following dependencies:
 
-- [RxSwift](https://github.com/ReactiveX/RxSwift) (`6.7.1`)
+- [RxSwift](https://github.com/ReactiveX/RxSwift) (`6.7.1`) – RxSwift and RxRelay packages only
 - [Lottie](https://github.com/airbnb/lottie-spm) (`4.5.1`)
 
 ## Usage
