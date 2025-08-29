@@ -302,6 +302,7 @@ public struct KycaidTheme {
     public let buttonColors: ButtonColors
     public let outlinedButtonColors: OutlinedButtonColors
     public let documentTypeButtonColors: DocumentTypeButtonColors
+    public let alertDialogColors: AlertDialogColors
     
     public struct ColorScheme {
         /// The main background color used for screens.
@@ -400,6 +401,9 @@ public struct KycaidTheme {
         /// Defaults to `primaryColor` unless explicitly specified.
         public let cursorColor: UIColor?
         
+        /// The color of the label above text fields,  dropdowns, check boxes, radio buttons and other input fields
+        public let labelColor: UIColor?
+        
         /// The background color of disabled text fields.
         public let disabledBackgroundColor: UIColor?
         
@@ -478,14 +482,17 @@ public struct KycaidTheme {
         /// The border color of the navigation bar.
         public let borderColor: UIColor?
         
-        /// The color of the navigation bar text.
-        public let textColor: UIColor?
+        /// The color of the title (step label) in the navigation bar.
+        public let titleColor: UIColor?
+        
+        /// The color of the subtitle (step description) in the navigation bar.
+        public let subtitleColor: UIColor?
         
         /// The tint color for the back button icon in the navigation bar.
         public let backButtonTintColor: UIColor?
         
         /// The tint color for the language icon in the navigation bar.
-        public let languageIconTintColor: UIColor?
+        public let languageButtonTintColor: UIColor?
     }
     
     public struct ButtonColors {
@@ -543,6 +550,50 @@ public struct KycaidTheme {
         
         /// The text color when a document type button is selected.
         public let selectedTextColor: UIColor?
+    }
+    
+    public struct AlertDialogColors {
+        /// The background color of the alert dialog
+        /// Defaults to `surfaceColor` unless explicitly specified.
+        public let backgroundColor: UIColor?
+        
+        /// The color of the title on the alert dialog
+        /// Defaults to `onSurfaceColor` unless explicitly specified.
+        public let titleColor: UIColor?
+        
+        /// The color of the message on the alert dialog
+        /// Defaults to `onSurfaceColor` unless explicitly specified.
+        public let messageColor: UIColor?
+        
+        /// Colors for the cancel button in the alert dialog
+        public let cancelButton: CancelButton
+        
+        /// Colors for the action button in the alert dialog
+        public let actionButton: ActionButton
+        
+        public struct CancelButton {
+            /// The background color of the cancel button.
+            /// Defaults to `OutlinedButtonColors.backgroundColor` unless explicitly specified.
+            public let backgroundColor: UIColor?
+            
+            /// The border color of the cancel button.
+            /// Defaults to `OutlinedButtonColors.borderColor` unless explicitly specified.
+            public let borderColor: UIColor?
+            
+            /// The text color in the cancel button.
+            /// Defaults to `OutlinedButtonColors.textColor` unless explicitly specified.
+            public let textColor: UIColor?
+        }
+        
+        public struct ActionButton {
+            /// The background color of the action button.
+            /// Defaults to `ButtonColors.backgroundColor` unless explicitly specified.
+            public let backgroundColor: UIColor?
+            
+            /// The text color in the action button.
+            /// Defaults to `ButtonColors.textColor` unless explicitly specified.
+            public let textColor: UIColor?
+        }
     }
 }
 ```
