@@ -20,8 +20,8 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "KYCAIDSDK",
-            url: "https://github.com/kycaid/ios-sdk/releases/download/25.9.2/KYCAIDSDK.xcframework.zip",
-            checksum: "d34a85046fc68800c0ef6668f01fe7d1fdb0a46659a0cb9bcdf48c775e9983f2"
+            url: "https://github.com/kycaid/ios-sdk/releases/download/25.9.3/KYCAIDSDK.xcframework.zip",
+            checksum: "9d1793702339e82ec755673ee713fbdebe18c649a2247dc80867414c2a2d721b"
         ),
         .target(
             name: "KYCAID",
@@ -32,7 +32,8 @@ let package = Package(
                 .product(name: "RxSwift", package: "RxSwift"),
                 .product(name: "RxRelay", package: "RxSwift"),
                 .product(name: "Lottie", package: "lottie-spm")
-            ]
+            ],
+            path: "Sources/KYCAID"
         )
     ]
 )
