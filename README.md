@@ -7,7 +7,7 @@
 * [Integration](#integration)
     - [How to install from Xcode](#how-to-install-from-xcode)
     - [How to install manually](#how-to-install-manually)
-    - [Required Dependencies](#required-dependencies)
+    - [SDK Dependencies](#sdk-dependencies)
 * [Usage](#usage)
     - [Setup SDK](#setup-sdk)
     - [Run verification flow](#run-verification-flow)
@@ -60,12 +60,17 @@ After installation, import SDK to your project by adding this:
 import KYCAIDSDK
 ```
 
-### Required Dependencies
+### SDK Dependencies
 
-You must also add the following dependencies:
+KYCAID SDK depends on several libraries:
 
-- [RxSwift](https://github.com/ReactiveX/RxSwift) (`6.7.1`) – RxSwift and RxRelay packages only
+- [RxSwift](https://github.com/ReactiveX/RxSwift) (`6.7.1`) – RxSwift and RxRelay products only
 - [Lottie](https://github.com/airbnb/lottie-spm) (`4.5.1`)
+- [SDWebImage](https://github.com/SDWebImage/SDWebImage) (`5.21.1`) – SDWebImage product only
+- [SDWebImageSVGCoder](https://github.com/SDWebImage/SDWebImageSVGCoder) (`1.8.0`)
+
+If you are using SPM to add the sdk to your project, you don't need to add all these dependencies manually; they should be **resolved automatically**.
+> However, if for some reason this didn't happen, or you manually added `KYCAIDSDK.xcframework` to your project, please add all these dependencies manually via SPM.
 
 ## Usage
 
