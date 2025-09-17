@@ -1,7 +1,1 @@
-import SDWebImage
-import SDWebImageSVGCoder
-import RxSwift
-import RxRelay
-import Lottie
-
-@_exported import KYCAIDSDK
+@_exported import KYCAIDSDK-core
