@@ -1,1 +1,1 @@
-@_exported import KYCAIDSDK-core
+@_exported import KYCAIDSDK
