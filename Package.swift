@@ -2,14 +2,14 @@
 import PackageDescription
 
 let package = Package(
-    name: "KYCAID",
+    name: "KYCAIDSDK",
     platforms: [
         .iOS(.v13)
     ],
     products: [
         .library(
-            name: "KYCAID",
-            targets: ["KYCAID"])
+            name: "KYCAIDSDK",
+            targets: ["KYCAIDSDK"])
     ],
     dependencies: [
         .package(url: "https://github.com/ReactiveX/RxSwift.git", from: "6.7.1"),
@@ -19,14 +19,14 @@ let package = Package(
     ],
     targets: [
         .binaryTarget(
-            name: "KYCAIDSDK",
-            url: "https://github.com/kycaid/ios-sdk/releases/download/25.9.12/KYCAIDSDK.xcframework.zip",
-            checksum: "b7677f6bfa7f707ebe9d67fa64aecaa6e86a72f13e925db7dd4754c2aaf6dac2"
+            name: "KYCAIDSDK-core",
+            url: "https://github.com/kycaid/ios-sdk/releases/download/25.9.13/KYCAIDSDK.xcframework.zip",
+            checksum: "7c119786a377d70d3ec67e64903217b10bb098b60867aab4673029e40bb7dacd"
         ),
         .target(
-            name: "KYCAID",
+            name: "KYCAIDSDK",
             dependencies: [
-                "KYCAIDSDK",
+                "KYCAIDSDK-core",
                 .product(name: "RxSwift", package: "RxSwift"),
                 .product(name: "RxRelay", package: "RxSwift"),
                 .product(name: "Lottie", package: "lottie-spm"),
