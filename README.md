@@ -14,6 +14,7 @@
     - [Handle verification result](#handle-verification-result)
     - [Handle possible errors and cancellation](#handle-possible-errors-and-cancellation)
     - [Get verification status](#get-verification-status)
+* [Analytics](#analytics)
 * [UI customization](#ui-customization)
 * [Useful notes](#notes)
 * [Screenshots](#screenshots)
@@ -90,7 +91,7 @@ let sdk = KYCAID(
     applicantId: "<Applicant ID>",
     externalApplicantId: "<External Applicant ID>",
     environment: <Environment>,
-    languageCode: "<Language Code>",
+    language: "<Language>",
     theme: <KycaidTheme>
 )
 ```
@@ -105,7 +106,7 @@ let sdk = KYCAID(
 
 `environment` – flag which determines which API will be used, `stg-api` or `api`, that is staging or production environment. Default value: `production`
 
-`languageCode` – code of the language in which the form will be run by default. Default value: `nil`
+`language` – the language in which the form will be run by default. Default value: `nil`
 
 `theme` – SDK theme, intended for UI customisation. See [UI customization](#ui-customization) to get more details about `KycaidTheme`.
 
@@ -271,6 +272,24 @@ struct VerificationState {
     /// States of the concrete verification steps
     public let verifications: [Verification]
 }
+```
+
+## Analytics
+
+In case you need to gather analytics about user actions during the verification flow, you can use `KYCAID.AnalyticsListener` interface to subscribe to analytics events coming from the SDK:
+```swift
+class MyAnalyticsListener: KYCAID.AnalyticsListener {
+    
+    func onEvent(_ event: String, params: [String : Any]) {
+        // Handle those events as you wish, for example, send them to your Firebase Analytics.
+    }
+}
+
+let sdk = KYCAID(
+    apiToken: "<YOUR API TOKEN>",
+    formId: "<YOUR FORM ID>",
+    analyticsListener: MyAnalyticsListener()
+)
 ```
 
 ## UI customization
@@ -604,13 +623,17 @@ Note that each property has its default value, so you can change only those you 
 
 ## Notes
 
-SDK uses Camera and Photos Library to make photo verification possible, so next entries shold be added to the `Info.plist` of your application:
+* SDK uses Camera and Photos Library to make photo verification possible, so next entries shold be added to the `Info.plist` of your application:
 
 ```
 "NSCameraUsageDescription" = "Camera permission is required to create verifications";
 "NSPhotoLibraryUsageDescription" = "Library permission is required to create verifications";
 
 ```
+* SDK uses Microphone to record a video during video verifications, so following entry should be added to the `Info.plist` of your application:
+```
+"NSMicrophoneUsageDescription" = "Microphone permission is required to create verifications";
+``` 
 #### Info.plist:
 ![Xcode Screenshot](/images/info_plist.png)
 
@@ -679,6 +702,8 @@ KYCAID SDK supports following languages:
 * Nepali
 * Sinhala
 * Tamil
+* Arabic
+* Kyrgyz
 
 ## Links
 
