@@ -13,15 +13,15 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/ReactiveX/RxSwift.git", from: "6.7.1"),
-        .package(url: "https://github.com/airbnb/lottie-spm.git", from: "4.5.1"),
+        .package(url: "https://github.com/airbnb/lottie-spm.git", from: "4.5.2"),
         .package(url: "https://github.com/SDWebImage/SDWebImage.git", from: "5.21.1"),
         .package(url: "https://github.com/SDWebImage/SDWebImageSVGCoder.git", from: "1.8.0")
     ],
     targets: [
         .binaryTarget(
             name: "KYCAIDSDK",
-            url: "https://github.com/kycaid/ios-sdk/releases/download/26.1.1/KYCAIDSDK.xcframework.zip",
-            checksum: "d37a80c3f69bf5180233c78f02d311bcf19af547f2a22a987901a67696889d5e"
+            url: "https://github.com/kycaid/ios-sdk/releases/download/26.2.0/KYCAIDSDK.xcframework.zip",
+            checksum: "f1a45fa0c9193efefe29d13536086021c936a589702a455eeaacee3b71afa218"
         ),
         .target(
             name: "KycaidSDKSwift",
