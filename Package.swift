@@ -12,26 +12,19 @@ let package = Package(
             targets: ["KycaidSDKSwift"])
     ],
     dependencies: [
-        .package(url: "https://github.com/ReactiveX/RxSwift.git", from: "6.7.1"),
-        .package(url: "https://github.com/airbnb/lottie-spm.git", from: "4.5.2"),
-        .package(url: "https://github.com/SDWebImage/SDWebImage.git", from: "5.21.1"),
-        .package(url: "https://github.com/SDWebImage/SDWebImageSVGCoder.git", from: "1.8.0")
+        .package(url: "https://github.com/airbnb/lottie-spm.git", from: "4.5.2")
     ],
     targets: [
         .binaryTarget(
             name: "KYCAIDSDK",
-            url: "https://github.com/kycaid/ios-sdk/releases/download/26.2.0/KYCAIDSDK.xcframework.zip",
-            checksum: "f1a45fa0c9193efefe29d13536086021c936a589702a455eeaacee3b71afa218"
+            url: "https://github.com/kycaid/ios-sdk/releases/download/26.3.0/KYCAIDSDK.xcframework.zip",
+            checksum: "88547559aba4fdd990904b764a0e2f402c8acd5e4d758e1d23a520b591906034"
         ),
         .target(
             name: "KycaidSDKSwift",
             dependencies: [
                 "KYCAIDSDK",
-                .product(name: "RxSwift", package: "RxSwift"),
-                .product(name: "RxRelay", package: "RxSwift"),
-                .product(name: "Lottie", package: "lottie-spm"),
-                .product(name: "SDWebImage", package: "SDWebImage"),
-                .product(name: "SDWebImageSVGCoder", package: "SDWebImageSVGCoder")
+                .product(name: "Lottie", package: "lottie-spm")
             ],
             path: "Sources/KYCAID"
         )
