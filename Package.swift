@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.6
 import PackageDescription
 
 let package = Package(
@@ -18,7 +18,7 @@ let package = Package(
         .binaryTarget(
             name: "KYCAIDSDK",
             url: "https://github.com/kycaid/ios-sdk/releases/download/26.4.1/KYCAIDSDK.xcframework.zip",
-            checksum: "fced37720610a77e8483d176027bb98318ca55d03750e36fd24f5813c01bf487"
+            checksum: "d2cdca855479361dcfb70bc0023bc002879ee6ff6bc78b04b4e72453fb1cb1a0"
         ),
         .target(
             name: "KycaidSDKSwift",
