@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "KYCAIDSDK",
     platforms: [
-        .iOS(.v13)
+        .iOS(.v15)
     ],
     products: [
         .library(
@@ -12,13 +12,13 @@ let package = Package(
             targets: ["KycaidSDKSwift"])
     ],
     dependencies: [
-        .package(url: "https://github.com/airbnb/lottie-spm.git", from: "4.5.2")
+        .package(url: "https://github.com/airbnb/lottie-spm.git", exact: "4.5.2")
     ],
     targets: [
         .binaryTarget(
             name: "KYCAIDSDK",
-            url: "https://github.com/kycaid/ios-sdk/releases/download/26.4.0/KYCAIDSDK.xcframework.zip",
-            checksum: "84362bba13cfce7171d24653f12d9dac25652a555ae9143b64938185731eb99a"
+            url: "https://github.com/kycaid/ios-sdk/releases/download/26.4.1/KYCAIDSDK.xcframework.zip",
+            checksum: "fced37720610a77e8483d176027bb98318ca55d03750e36fd24f5813c01bf487"
         ),
         .target(
             name: "KycaidSDKSwift",
