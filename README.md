@@ -23,8 +23,8 @@
 
 ## Requirements
 
-* Xcode 11+
-* iOS 13+
+* Xcode 13+
+* iOS 15+
 
 ## Integration
 
@@ -63,12 +63,9 @@ import KYCAIDSDK
 
 ### SDK Dependencies
 
-KYCAID SDK depends on several libraries:
+KYCAID SDK depends on following libraries:
 
-- [RxSwift](https://github.com/ReactiveX/RxSwift) (`6.7.1`) – RxSwift and RxRelay products only
 - [Lottie](https://github.com/airbnb/lottie-spm) (`4.5.1`)
-- [SDWebImage](https://github.com/SDWebImage/SDWebImage) (`5.21.1`) – SDWebImage product only
-- [SDWebImageSVGCoder](https://github.com/SDWebImage/SDWebImageSVGCoder) (`1.8.0`)
 
 If you are using SPM to add the sdk to your project, you don't need to add all these dependencies manually; they should be **resolved automatically**.
 > However, if for some reason this didn't happen, or you manually added `KYCAIDSDK.xcframework` to your project, please add all these dependencies manually via SPM.
