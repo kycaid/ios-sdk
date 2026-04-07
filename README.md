@@ -65,7 +65,7 @@ import KYCAIDSDK
 
 KYCAID SDK depends on following libraries:
 
-- [Lottie](https://github.com/airbnb/lottie-spm) (`4.5.1`)
+- [Lottie](https://github.com/airbnb/lottie-spm) (`4.5.2`)
 
 If you are using SPM to add the sdk to your project, you don't need to add all these dependencies manually; they should be **resolved automatically**.
 > However, if for some reason this didn't happen, or you manually added `KYCAIDSDK.xcframework` to your project, please add all these dependencies manually via SPM.
