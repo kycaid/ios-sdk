@@ -12,13 +12,13 @@ let package = Package(
             targets: ["KycaidSDKSwift"])
     ],
     dependencies: [
-        .package(url: "https://github.com/airbnb/lottie-spm.git", from: "4.5.2")
+        .package(url: "https://github.com/airbnb/lottie-spm.git", "4.5.0"..<"4.6.0")
     ],
     targets: [
         .binaryTarget(
             name: "KYCAIDSDK",
-            url: "https://github.com/kycaid/ios-sdk/releases/download/26.4.3/KYCAIDSDK.xcframework.zip",
-            checksum: "e82fa39b034fbda32a8cde84db96eec07d83160efb79b0a9d0fd0e525cc73784"
+            url: "https://github.com/kycaid/ios-sdk/releases/download/26.4.4/KYCAIDSDK.xcframework.zip",
+            checksum: "9ed9102e51b7ebc57dc38016e5aae0f05e920b1644b00a516adea30f92f18841"
         ),
         .target(
             name: "KycaidSDKSwift",
