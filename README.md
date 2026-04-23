@@ -89,7 +89,8 @@ let sdk = KYCAID(
     externalApplicantId: "<External Applicant ID>",
     environment: <Environment>,
     language: "<Language>",
-    theme: <KycaidTheme>
+    theme: <KycaidTheme>,
+    showsCompleteButtonAtLastStep: <Bool>
 )
 ```
 
@@ -105,7 +106,9 @@ let sdk = KYCAID(
 
 `language` – the language in which the form will be run by default. Default value: `nil`
 
-`theme` – SDK theme, intended for UI customisation. See [UI customization](#ui-customization) to get more details about `KycaidTheme`.
+`theme` – SDK theme, intended for UI customisation. See [UI customization](#ui-customization) to get more details about `KycaidTheme`
+
+`showsCompleteButtonAtLastStep` – whether a complete button should be shown on the verification status screen. `false` by default.
 
 #### By Form Token:
 If you don't want to hold `apiToken` and `formId` in your app, then you can initialize `KYCAID` with `formToken`, which you must obtain yourself using this endpoint: https://docs.kycaid.com/api/forms/form-get-url.
