@@ -166,7 +166,7 @@ struct VerificationInfo {
 
 /// Represents the verification status
 enum VerificationStatus {
-    case pending, approved, declined
+    case pending, customerPending, approved, declined
 }
 ```
 
@@ -238,10 +238,17 @@ struct VerificationState {
     public enum VerificationType: String {
         case profile = "profile"
         case document = "document"
-        case facial = "facial"
-        case address = "address"
-        case databaseScreening = "database_screening"
         case questionnaire = "questionnaire"
+        case facial = "facial"
+        case taxId = "tax_id"
+        case address = "address"
+        case sourceOfFunds = "aml"
+        case videoQuiz = "video"
+        case liveVideo = "live_video"
+        case paymentMethod = "payment_method"
+        case databaseScreening = "database_screening"
+        case qes = "qes"
+        case undefined = "undefined"
     }
     
     /// State of the concrete verification step
@@ -266,7 +273,7 @@ struct VerificationState {
     /// Identifier of the applicant who is being verified
     public let applicantId: String
     
-    /// Overall verification status. Possible values: pending, approved, declined
+    /// Overall verification status. Possible values: pending, customerPending, approved, declined
     public let status: VerificationStatus
     
     /// States of the concrete verification steps
@@ -318,6 +325,7 @@ public struct KycaidTheme {
     public let cardColors: CardColors
     public let textFieldColors: TextFieldColors
     public let dropdownColors: DropdownColors
+    public let multiSelectColors: MultiSelectColors
     public let radioButtonColors: RadioButtonColors
     public let checkBoxColors: CheckBoxColors
     public let navigationBarColors: NavigationBarColors
@@ -463,6 +471,47 @@ public struct KycaidTheme {
         /// The border color of the focused dropdown button.
         /// Defaults to `primaryColor` unless explicitly specified.
         public let focusedBorderColor: UIColor?
+    }
+
+    public struct MultiSelectColors {
+        /// Colors of the multi-select trigger view (the view that opens the options list).
+        /// Mirrors the dropdown trigger styling.
+        /// Each value defaults to the matching `DropdownColors` value unless explicitly specified.
+        public let trigger: DropdownColors
+
+        /// Colors of the selected option tags shown below the trigger view.
+        public let tag: TagColors
+
+        public init(
+            trigger: DropdownColors = DropdownColors(),
+            tag: TagColors = TagColors()
+        ) {
+            self.trigger = trigger
+            self.tag = tag
+        }
+
+        public struct TagColors {
+            /// The background color of a selected option tag.
+            public let backgroundColor: UIColor?
+
+            /// The border color of a selected option tag.
+            /// Defaults to `primaryColor` unless explicitly specified.
+            public let borderColor: UIColor?
+
+            /// The color of text and the remove icon inside a selected option tag.
+            /// Defaults to `primaryColor` unless explicitly specified.
+            public let textColor: UIColor?
+
+            public init(
+                backgroundColor: UIColor? = nil,
+                borderColor: UIColor? = nil,
+                textColor: UIColor? = nil
+            ) {
+                self.backgroundColor = backgroundColor
+                self.borderColor = borderColor
+                self.textColor = textColor
+            }
+        }
     }
     
     public struct RadioButtonColors {
