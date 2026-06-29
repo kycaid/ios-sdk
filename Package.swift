@@ -16,18 +16,18 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/airbnb/lottie-spm.git", "4.5.0"..<"4.6.0"),
-        .package(url: "https://github.com/AndyQ/NFCPassportReader", exact: "2.3.0")
+        .package(url: "https://github.com/krzyzanowskim/OpenSSL-Package.git", .upToNextMinor(from: "3.3.1000"))
     ],
     targets: [
         .binaryTarget(
             name: "KYCAIDSDK",
-            url: "https://github.com/kycaid/ios-sdk/releases/download/26.7.0-rc2/KYCAIDSDK.xcframework.zip",
-            checksum: "57850ffa9f7aa7e4dfb641e4f35f20cf55cbe9b073e78795a0efe19aa1fe0dcd"
+            url: "https://github.com/kycaid/ios-sdk/releases/download/26.7.0-rc3/KYCAIDSDK.xcframework.zip",
+            checksum: "2cee248f37a9d23dd4c5092782b3e52b81b903ff0c9a9d870588a09883c3be13"
         ),
         .binaryTarget(
             name: "KYCAIDSDKNFC",
-            url: "https://github.com/kycaid/ios-sdk/releases/download/26.7.0-rc2/KYCAIDSDKNFC.xcframework.zip",
-            checksum: "fd0d007ff9334b68e40a1ab6d2a7281ccee62eb653b2bdbca1ab4c8bf4098f5c"
+            url: "https://github.com/kycaid/ios-sdk/releases/download/26.7.0-rc3/KYCAIDSDKNFC.xcframework.zip",
+            checksum: "20451955e4c86421426d3f07b42874d6baabfb4eaf89a854dc1491f1c9d9b726"
         ),
         .target(
             name: "KycaidSDKSwift",
@@ -42,7 +42,7 @@ let package = Package(
             dependencies: [
                 "KYCAIDSDKNFC",
                 "KycaidSDKSwift",
-                .product(name: "NFCPassportReader", package: "NFCPassportReader")
+                .product(name: "OpenSSL", package: "OpenSSL-Package")
             ],
             path: "Sources/KYCAIDNFC"
         )
