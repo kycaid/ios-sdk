@@ -14,6 +14,10 @@
     - [Handle verification result](#handle-verification-result)
     - [Handle possible errors and cancellation](#handle-possible-errors-and-cancellation)
     - [Get verification status](#get-verification-status)
+* [NFC document verification](#nfc-document-verification)
+    - [Install the NFC module](#install-the-nfc-module)
+    - [Configure capabilities and Info.plist](#configure-capabilities-and-infoplist)
+    - [Enable NFC feature](#enable-nfc-feature)
 * [Analytics](#analytics)
 * [UI customization](#ui-customization)
 * [Useful notes](#notes)
@@ -280,6 +284,70 @@ struct VerificationState {
     public let verifications: [Verification]
 }
 ```
+
+## NFC document verification
+
+If your verification form includes documents with an embedded RFID chip (biometric passports and some ID cards), the SDK can read that chip over NFC and cross-check the data on the chip against the recognised document. This gives you a much stronger guarantee that the document is genuine and hasn't been tampered with.
+
+NFC verification support is shipped as a separate `KYCAIDSDKNFC` module that supplements the main `KYCAIDSDK`. It's optional: if you don't add and enable it, the SDK simply runs the verification flow without the NFC step. This keeps your app size unaffected unless you actually opt in — the NFC module and its dependencies are only pulled in when you add the `KYCAIDSDKNFC` product.
+
+> NFC reading only works on a physical device with NFC hardware (iPhone 7 and newer). It is not available in the simulator.
+
+### Install the NFC module
+
+The NFC module is distributed alongside the main SDK, so no new package URL is needed.
+
+#### From Xcode (Swift Package Manager)
+
+1. Add the package as described in [How to install from Xcode](#how-to-install-from-xcode) (or open the already added `https://github.com/kycaid/ios-sdk` package).
+2. In the products list, select **both** `KYCAIDSDK` and `KYCAIDSDKNFC` and add them to your app target.
+
+#### Manually
+
+1. Download the latest `KYCAIDSDK.xcframework` and `KYCAIDSDKNFC.xcframework` from the [Releases](https://github.com/kycaid/ios-sdk/releases) page.
+2. Drop both into the Frameworks, Libraries and Embedded Content section of Xcode and select "Embed and sign".
+3. The NFC module depends on [OpenSSL](https://github.com/krzyzanowskim/OpenSSL-Package), so add it too. If you install via SPM this dependency is **resolved automatically**; when installing manually you have to add `OpenSSL.xcframework` yourself.
+
+### Configure capabilities and Info.plist
+
+NFC reading requires a few project settings. Without them the OS won't allow the SDK to start an NFC session.
+
+1. In your app target, open **Signing & Capabilities**, add the **Near Field Communication Tag Reading** capability and enable “Pace” and “Tag” options. This adds the following entitlement to your app:
+```xml
+<key>com.apple.developer.nfc.readersession.formats</key>
+<array>
+    <string>TAG</string>
+    <string>PACE</string>
+</array>
+```
+2. Add a usage description string to your `Info.plist`:
+```
+"NFCReaderUsageDescription" = "To validate that the data on the document matches the data on its chip";
+```
+3. Declare the application identifiers (AIDs) the SDK selects on the chip in your `Info.plist`:
+```xml
+<key>com.apple.developer.nfc.readersession.iso7816.select-identifiers</key>
+<array>
+    <string>A0000002471001</string>
+</array>
+```
+
+### Enable NFC feature
+
+The main SDK module doesn't contain NFC feature on its own. To enable it, call `KycaidNfc.register()` once before you start a verification, for example at app launch:
+```swift
+import KYCAIDSDKNFC
+
+KycaidNfc.register()
+```
+Once registered, whenever the verification flow reaches a document that has an NFC chip, the SDK automatically offers the NFC scanning step. If you skip this call, the SDK keeps working normally but without NFC reading.
+
+> Note: the NFC scanning step is shown only when **all** of the following hold:
+> - NFC verification is enabled for the document step of your form on the [Dashboard](https://app.kycaid.com/dashboard);
+> - the recognised document actually has a readable NFC chip;
+> - the `KYCAIDSDKNFC` product is added, `KycaidNfc.register()` is called, and the capabilities and `Info.plist` entries above are in place.
+>
+> If any of these is missing, the verification flow continues normally, just without the NFC verification step.
 
 ## Analytics
 
