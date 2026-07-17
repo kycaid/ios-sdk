@@ -21,13 +21,13 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "KYCAIDSDK",
-            url: "https://github.com/kycaid/ios-sdk/releases/download/26.7.0/KYCAIDSDK.xcframework.zip",
-            checksum: "a4af68ce7882ff7080b8839b8a11f2024da062e539b6a5de91f1d007c4c49195"
+            url: "https://github.com/kycaid/ios-sdk/releases/download/26.7.1/KYCAIDSDK.xcframework.zip",
+            checksum: "2a476acda975a6def10df51c70a5939ddd381d109a2e3d5b34edef7a5c70d82b"
         ),
         .binaryTarget(
             name: "KYCAIDSDKNFC",
-            url: "https://github.com/kycaid/ios-sdk/releases/download/26.7.0/KYCAIDSDKNFC.xcframework.zip",
-            checksum: "03ad241354ac6f848a5b0d79d582d1f66dd51feaf487e7e7997a5e0a6a6b8d1c"
+            url: "https://github.com/kycaid/ios-sdk/releases/download/26.7.1/KYCAIDSDKNFC.xcframework.zip",
+            checksum: "d89059509c4eb90878d104896f8409daad3805dd95b813bad357f481c893ef9d"
         ),
         .target(
             name: "KycaidSDKSwift",
